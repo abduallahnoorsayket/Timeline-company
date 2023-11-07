@@ -23,8 +23,10 @@
                         <h3>Lorem ipsum dolor</h3>
                         <p>Lorem ipsum dolor sit amet elit ornare velit non</p>
                       </div>
-                      <div class="timeline-icon d-md-block d-none">
-                        <i class="fa fa-business-time"></i>
+                      <div class="date-content float-right">
+                        <h6>Oct</h6>
+                        <h1>01</h1>
+                        <h6>2020</h6>
                       </div>
                     </div>
                   </div>
@@ -38,12 +40,17 @@
                   </div>
                   <div class="col-md-6">
                     <div class="timeline-box">
-                      <div class="timeline-icon">
-                        <i class="fa fa-gift"></i>
+                      <div class="timeline-icon d-md-none d-block">
+                        <i class="fa fa-business-time"></i>
                       </div>
                       <div class="timeline-text">
                         <h3>Lorem ipsum dolor</h3>
                         <p>Lorem ipsum dolor sit amet elit ornare velit non</p>
+                      </div>
+                      <div class="date-content float-right">
+                        <h6>Oct</h6>
+                        <h1>01</h1>
+                        <h6>2020</h6>
                       </div>
                     </div>
                   </div>
@@ -62,8 +69,10 @@
                         <h3>Lorem ipsum dolor</h3>
                         <p>Lorem ipsum dolor sit amet elit ornare velit non</p>
                       </div>
-                      <div class="timeline-icon d-md-block d-none">
-                        <i class="fa fa-business-time"></i>
+                      <div class="date-content float-right">
+                        <h6>Oct</h6>
+                        <h1>01</h1>
+                        <h6>2020</h6>
                       </div>
                     </div>
                   </div>

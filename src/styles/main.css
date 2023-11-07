@@ -109,12 +109,14 @@ body {
 .timeline .timeline-box,
 .timeline .timeline-launch {
   position: relative;
-  display: inline-block;
   margin: 15px;
-  padding: 20px;
+  /* padding: 20px; */
   /* border: 1px solid #dddddd; */
   /* border-radius: 6px; */
   background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .timeline .timeline-launch {
@@ -201,6 +203,7 @@ body {
   width: calc(100% - 40px);
   float: left;
   text-align: left;
+  padding: 10px 20px;
 }
 
 .timeline .timeline-launch .timeline-text {
@@ -219,6 +222,16 @@ body {
   margin-bottom: 0;
 }
 
+/* custom csss */
+.date-content h6,
+h1 {
+  margin-bottom: 0;
+}
+.date-content {
+  text-align: center;
+  padding: 20px 15px;
+  border-left: 4px solid #eee;
+}
 @media (max-width: 768px) {
   .timeline .timeline-continue::after {
     left: 40px;
