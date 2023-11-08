@@ -228,7 +228,13 @@ export default {
         .sort((a, b) => new Date(b.date) - new Date(a.date));
     },
   },
+  created() {
+    // this.isAtBottom();
+  },
   updated() {},
+  mounted() {
+    this.getNextCard();
+  },
   methods: {
     openAddPostModal() {
       this.showModal = !this.showModal;
@@ -271,6 +277,29 @@ export default {
         this.$store.dispatch("submitdata", this.form_data);
         this.CloseModal();
       }
+    },
+    // for infinite scrolling
+    getNextCard() {
+      window.onscroll = () => {
+        let bottomOfWindow =
+          document.documentElement.scrollTop + window.innerHeight ===
+          document.documentElement.offsetHeight;
+        if (bottomOfWindow) {
+          for (let i = 6; i < 9; i++) {
+            this.$store.dispatch("submitdata", {
+              title: `Post Title ${i}`,
+              sub_title:
+                "Lorem Ipsum is simply dummy text of the.There are many variations of passages of Lorem Ipsum available.",
+              images: null,
+              month: this.post_months[i].name,
+              date: "2023-10-13",
+              date_numer: i,
+              year: `202${i}`,
+              direction: i % 2 == 0 ? "left" : "right",
+            });
+          }
+        }
+      };
     },
   },
 };
