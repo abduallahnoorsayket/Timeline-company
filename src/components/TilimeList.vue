@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-container">
     <div class="title">
       <h2>Our company milestone</h2>
       <h5 class="text-muted">Wow ! what a journry so far</h5>
