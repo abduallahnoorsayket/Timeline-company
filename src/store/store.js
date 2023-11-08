@@ -43,7 +43,7 @@ const store = createStore({
           "Post subtitle 3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         images: null,
         month: "Sept",
-        date: "12",
+        date: "20",
         year: "2020",
         direction: "left",
       },
@@ -52,7 +52,7 @@ const store = createStore({
         sub_title: "Post subtitle 4 ",
         images: null,
         month: "Aug",
-        date: "20",
+        date: "22",
         year: "2020",
         direction: "right",
       },
@@ -74,20 +74,26 @@ const store = createStore({
           },
         ],
         month: "July",
-        date: "18",
+        date: "25",
         year: "2020",
         direction: "left",
       },
     ],
   },
   mutations: {
-    // Mutations for modifying the state
+    addItem(state, newItem) {
+      state.posts.push(newItem);
+    },
   },
   actions: {
-    // Actions for making asynchronous changes to the state
+    async submitdata({ commit }, payload) {
+      // Simulate an API call
+      // const data = await fetchDataFromAPI();
+      commit("addItem", payload);
+    },
   },
   getters: {
-    // Getters for computed properties based on the state
+    getPosts: (state) => state.posts,
   },
 });
 
