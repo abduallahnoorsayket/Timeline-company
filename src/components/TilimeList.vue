@@ -1,8 +1,16 @@
 <template>
   <div class="main-container">
-    <div class="title">
+    <div class="m-4">
+      <h3><strong>Timeline</strong></h3>
+      <p class="time-line-bredcrumb">
+        PAGES <i class="fa fa-arrow-right" aria-hidden="true"></i>
+
+        TIMELINE
+      </p>
+    </div>
+    <div class="title mt-5">
       <h2>Our company milestone</h2>
-      <h5 class="text-muted">Wow ! what a journry so far</h5>
+      <h5 class="text-muted uppercase">Wow!!! what a journry so far ... !!!</h5>
     </div>
     <div class="timeline">
       <div class="container">
@@ -46,23 +54,28 @@
                       <div class="timeline-icon d-md-none d-block">
                         <i class="fa fa-business-time"></i>
                       </div>
-                      <div class="timeline-text">
-                        <h3 v-if="item.title">{{ item.title }}</h3>
-                        <p>{{ item.sub_title }}</p>
-                        <div
-                          class="image-container d-flex mt-2"
-                          v-if="item.images"
-                        >
-                          <template
-                            v-for="(image, index) in item.images"
-                            :key="index"
+                      <div class="timeline-text d-flex">
+                        <div class="image-container" v-if="item.profileImage">
+                          <img :src="item.profileImage" alt="" />
+                        </div>
+                        <div class="timeline-content">
+                          <h3 v-if="item.title">{{ item.title }}</h3>
+                          <p>{{ item.sub_title }}</p>
+                          <div
+                            class="image-container d-flex mt-2"
+                            v-if="item.images"
                           >
-                            <img
-                              v-if="item.images"
-                              :src="image.image_url"
-                              alt="no image"
-                            />
-                          </template>
+                            <template
+                              v-for="(image, index) in item.images"
+                              :key="index"
+                            >
+                              <img
+                                v-if="item.images"
+                                :src="image.image_url"
+                                alt="no image"
+                              />
+                            </template>
+                          </div>
                         </div>
                       </div>
                       <div class="date-content float-right">
@@ -102,28 +115,29 @@
                     @submit.prevent="submitAddNewPost"
                     autocomplete="off"
                   >
-                    <div class="row mt-4">
+                    <div class="row mt-2">
                       <div class="col">
+                        <label for="">Post Title</label>
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Post Title"
                           v-model="form_data.title"
                           required
                         />
                       </div>
                     </div>
-                    <div class="row mt-4">
+                    <div class="row mt-2">
                       <div class="col">
+                        <label for="">Post SubTitle</label>
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Post SubTitle"
                           v-model="form_data.sub_title"
                           required
                         />
                       </div>
                       <div class="col">
+                        <label for="">Post Direction</label>
                         <select
                           class="form-control"
                           v-model="form_data.direction"
@@ -137,17 +151,9 @@
                         </select>
                       </div>
                     </div>
-                    <div class="row mt-4">
-                      <!-- <div class="col">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Month"
-                          v-model="form_data.month"
-                          required
-                        />
-                      </div> -->
+                    <div class="row mt-2">
                       <div class="col">
+                        <label for="">Post Date</label>
                         <input
                           type="date"
                           class="form-control"
@@ -156,15 +162,6 @@
                           required
                         />
                       </div>
-                      <!-- <div class="col">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Year"
-                          v-model="form_data.year"
-                          required
-                        />
-                      </div> -->
                     </div>
                   </form>
                 </div>
@@ -228,9 +225,7 @@ export default {
         .sort((a, b) => new Date(b.date) - new Date(a.date));
     },
   },
-  created() {
-    // this.isAtBottom();
-  },
+  created() {},
   updated() {},
   mounted() {
     this.getNextCard();
@@ -287,7 +282,7 @@ export default {
         if (bottomOfWindow) {
           for (let i = 6; i < 9; i++) {
             this.$store.dispatch("submitdata", {
-              title: `Post Title ${i}`,
+              title: `Lorem Ipsum is simply dummy title ${i}`,
               sub_title:
                 "Lorem Ipsum is simply dummy text of the.There are many variations of passages of Lorem Ipsum available.",
               images: null,
@@ -296,6 +291,7 @@ export default {
               date_numer: i,
               year: `202${i}`,
               direction: i % 2 == 0 ? "left" : "right",
+              profileImage: null,
             });
           }
         }

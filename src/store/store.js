@@ -1,12 +1,10 @@
-// store/store.js
-
 import { createStore } from "vuex";
 
 const store = createStore({
   state: {
     posts: [
       {
-        title: "Post Title 1",
+        title: "Office Starting function",
         sub_title:
           "Post subtitle 1 ,It is a long established fact that a reader will be distracted",
         images: [
@@ -28,9 +26,10 @@ const store = createStore({
         date_numer: "20",
         year: "2017",
         direction: "left",
+        profileImage: null,
       },
       {
-        title: "Post Title 2",
+        title: "New people joined",
         sub_title:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ",
         images: null,
@@ -39,9 +38,11 @@ const store = createStore({
         date_numer: "15",
         year: "2018",
         direction: "right",
+        profileImage:
+          "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       },
       {
-        title: "Post Title 3",
+        title: "Design meet up",
         sub_title:
           "Post subtitle 3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         images: null,
@@ -50,9 +51,11 @@ const store = createStore({
         date_numer: "13",
         year: "2019",
         direction: "left",
+        profileImage:
+          "https://images.pexels.com/photos/1462980/pexels-photo-1462980.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       },
       {
-        title: "Post Title 4 Lorem Ipsum is simply dummy",
+        title: "Lorem Ipsum is simply dummy",
         sub_title:
           "Subtitle 4 It is a long established fact that a reader will be distracted by the readable content of.",
         images: null,
@@ -61,9 +64,10 @@ const store = createStore({
         date_numer: "18",
         year: "2020",
         direction: "right",
+        profileImage: null,
       },
       {
-        title: "Post Title 5",
+        title: "Employee PhotoShot",
         sub_title:
           "Post subtitle 5, It is a long established fact that a reader will be distracted",
         images: [
@@ -85,6 +89,7 @@ const store = createStore({
         date_numer: "13",
         year: "2021",
         direction: "left",
+        profileImage: null,
       },
     ],
   },
@@ -95,7 +100,6 @@ const store = createStore({
   },
   actions: {
     async submitdata({ commit }, payload) {
-      // Simulate an API call
       // const data = await fetchDataFromAPI();
       commit("addItem", payload);
     },
