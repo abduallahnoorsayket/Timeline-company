@@ -67,7 +67,7 @@
                       </div>
                       <div class="date-content float-right">
                         <h6>{{ item.month }}</h6>
-                        <h1>{{ item.date }}</h1>
+                        <h1>{{ item.date_numer }}</h1>
                         <h6>{{ item.year }}</h6>
                       </div>
                     </div>
@@ -129,14 +129,16 @@
                           v-model="form_data.direction"
                           required
                         >
-                          <option selected disabled>Select direction</option>
+                          <option value="" selected disabled>
+                            Select direction
+                          </option>
                           <option value="left">left</option>
                           <option value="right">right</option>
                         </select>
                       </div>
                     </div>
                     <div class="row mt-4">
-                      <div class="col">
+                      <!-- <div class="col">
                         <input
                           type="text"
                           class="form-control"
@@ -144,17 +146,17 @@
                           v-model="form_data.month"
                           required
                         />
-                      </div>
+                      </div> -->
                       <div class="col">
                         <input
-                          type="text"
+                          type="date"
                           class="form-control"
                           placeholder="Date"
                           v-model="form_data.date"
                           required
                         />
                       </div>
-                      <div class="col">
+                      <!-- <div class="col">
                         <input
                           type="text"
                           class="form-control"
@@ -162,7 +164,7 @@
                           v-model="form_data.year"
                           required
                         />
-                      </div>
+                      </div> -->
                     </div>
                   </form>
                 </div>
@@ -199,16 +201,31 @@ export default {
         sub_title: null,
         month: null,
         date: null,
+        date_numer: null,
         year: null,
         direction: null,
       },
+      post_months: [
+        { name: "Jan", numeric: 1 },
+        { name: "Feb", numeric: 2 },
+        { name: "Mar", numeric: 3 },
+        { name: "Apr", numeric: 4 },
+        { name: "May", numeric: 5 },
+        { name: "Jun", numeric: 6 },
+        { name: "Jul", numeric: 7 },
+        { name: "Aug", numeric: 8 },
+        { name: "Sept", numeric: 9 },
+        { name: "Oct", numeric: 10 },
+        { name: "Nov", numeric: 11 },
+        { name: "Dec", numeric: 12 },
+      ],
     };
   },
   computed: {
     all_posts() {
       return this.$store.getters.getPosts
         .slice()
-        .sort((a, b) => b.date - a.date);
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
     },
   },
   updated() {},
@@ -234,15 +251,26 @@ export default {
       if (
         this.form_data.title &&
         this.form_data.sub_title &&
-        this.form_data.month &&
-        this.form_data.date &&
-        this.form_data.year &&
+        this.form_data.direction &&
         this.form_data.date !== null
       ) {
-        this.$store.dispatch("submitdata", this.form_data);
-      }
+        let resultdate = new Date(this.form_data.date);
+        let dd = resultdate.getDate();
+        let mm = resultdate.getMonth();
+        let yyyy = resultdate.getFullYear();
+        if (dd < 10) {
+          dd = "0" + dd;
+        }
+        if (mm < 10) {
+          mm = "0" + mm;
+        }
 
-      this.CloseModal();
+        this.form_data.year = yyyy;
+        this.form_data.month = this.post_months[mm].name;
+        this.form_data.date_numer = dd;
+        this.$store.dispatch("submitdata", this.form_data);
+        this.CloseModal();
+      }
     },
   },
 };

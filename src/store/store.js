@@ -23,7 +23,8 @@ const store = createStore({
           },
         ],
         month: "Oct",
-        date: "01",
+        date: "2020-09-20",
+        date_numer: "20",
         year: "2020",
         direction: "left",
       },
@@ -33,51 +34,52 @@ const store = createStore({
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ",
         images: null,
         month: "Sept",
-        date: "16",
-        year: "2020",
+        date: "2021-10-15",
+        date_numer: "15",
+        year: "2021",
         direction: "right",
       },
-      {
-        title: "Post Title 3",
-        sub_title:
-          "Post subtitle 3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        images: null,
-        month: "Sept",
-        date: "20",
-        year: "2020",
-        direction: "left",
-      },
-      {
-        title: "Post Title 4 Lorem Ipsum is simply dummy",
-        sub_title: "Post subtitle 4 ",
-        images: null,
-        month: "Aug",
-        date: "22",
-        year: "2020",
-        direction: "right",
-      },
-      {
-        title: "Post Title 5",
-        sub_title: "Post subtitle 5",
-        images: [
-          {
-            image_url:
-              "https://images.pexels.com/photos/7439754/pexels-photo-7439754.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-          },
-          {
-            image_url:
-              "https://images.pexels.com/photos/7534232/pexels-photo-7534232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-          },
-          {
-            image_url:
-              "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          },
-        ],
-        month: "July",
-        date: "25",
-        year: "2020",
-        direction: "left",
-      },
+      // {
+      //   title: "Post Title 3",
+      //   sub_title:
+      //     "Post subtitle 3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      //   images: null,
+      //   month: "Sept",
+      //   date: "20",
+      //   year: "2020",
+      //   direction: "left",
+      // },
+      // {
+      //   title: "Post Title 4 Lorem Ipsum is simply dummy",
+      //   sub_title: "Post subtitle 4 ",
+      //   images: null,
+      //   month: "Aug",
+      //   date: "22",
+      //   year: "2020",
+      //   direction: "right",
+      // },
+      // {
+      //   title: "Post Title 5",
+      //   sub_title: "Post subtitle 5",
+      //   images: [
+      //     {
+      //       image_url:
+      //         "https://images.pexels.com/photos/7439754/pexels-photo-7439754.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      //     },
+      //     {
+      //       image_url:
+      //         "https://images.pexels.com/photos/7534232/pexels-photo-7534232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      //     },
+      //     {
+      //       image_url:
+      //         "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      //     },
+      //   ],
+      //   month: "July",
+      //   date: "25",
+      //   year: "2020",
+      //   direction: "left",
+      // },
     ],
   },
   mutations: {
