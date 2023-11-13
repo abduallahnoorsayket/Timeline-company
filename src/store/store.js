@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 const store = createStore({
   state: {
+    isModalvisible: false,
     posts: [
       {
         title: "Office Starting function",
@@ -96,6 +97,9 @@ const store = createStore({
   mutations: {
     addItem(state, newItem) {
       state.posts.push(newItem);
+    },
+    toggleModal(state) {
+      state.isModalVisible = !state.isModalVisible;
     },
   },
   actions: {

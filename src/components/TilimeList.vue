@@ -1,5 +1,6 @@
 <template>
   <div class="main-container">
+    <AddPostModal v-if="AddModalVisible" />
     <div class="m-4">
       <h3><strong>Timeline</strong></h3>
       <p class="time-line-bredcrumb">
@@ -31,177 +32,33 @@
           <div class="col-lg-12">
             <div class="timeline-container">
               <div class="timeline-continue" v-if="all_posts">
-                <div
-                  class="row"
+                <TimeCard
                   v-for="(item, index) in all_posts"
                   :key="index"
-                  :class="{
-                    'timeline-right': item.direction === 'right',
-                    'timeline-left': item.direction === 'left',
-                  }"
-                >
-                  <div
-                    class="col-md-6"
-                    :class="{
-                      '': item.direction === 'right',
-                      'd-md-none d-block': item.direction === 'left',
-                    }"
-                  >
-                    <p class="timeline-date"></p>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="timeline-box">
-                      <div class="timeline-icon d-md-none d-block">
-                        <i class="fa fa-business-time"></i>
-                      </div>
-                      <div class="timeline-text d-flex">
-                        <div class="image-container" v-if="item.profileImage">
-                          <img :src="item.profileImage" alt="" />
-                        </div>
-                        <div class="timeline-content">
-                          <h3 v-if="item.title">{{ item.title }}</h3>
-                          <p>{{ item.sub_title }}</p>
-                          <div
-                            class="image-container d-flex mt-2"
-                            v-if="item.images"
-                          >
-                            <template
-                              v-for="(image, index) in item.images"
-                              :key="index"
-                            >
-                              <img
-                                v-if="item.images"
-                                :src="image.image_url"
-                                alt="no image"
-                              />
-                            </template>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="date-content float-right">
-                        <h6>{{ item.month }}</h6>
-                        <h1>{{ item.date_numer }}</h1>
-                        <h6>{{ item.year }}</h6>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    v-if="item.direction === 'left'"
-                    :class="{
-                      '': item.direction === 'right',
-                      'col-md-6 d-md-block d-none': item.direction === 'left',
-                    }"
-                  >
-                    <p class="timeline-date"></p>
-                  </div>
-                </div>
+                  :card_object="item"
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- modal  type  -->
-    <teleport to="body" v-if="showModal">
-      <div id="modal-window" :class="[showModal ? 'modal' : null]">
-        <div class="modal-dialog">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="modal-content">
-                <div class="card-header">Add new Post</div>
-                <div class="card-body">
-                  <form
-                    class="m-4"
-                    @submit.prevent="submitAddNewPost"
-                    autocomplete="off"
-                  >
-                    <div class="row mt-2">
-                      <div class="col">
-                        <label for="">Post Title</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="form_data.title"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div class="row mt-2">
-                      <div class="col">
-                        <label for="">Post SubTitle</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          v-model="form_data.sub_title"
-                          required
-                        />
-                      </div>
-                      <div class="col">
-                        <label for="">Post Direction</label>
-                        <select
-                          class="form-control"
-                          v-model="form_data.direction"
-                          required
-                        >
-                          <option value="" selected disabled>
-                            Select direction
-                          </option>
-                          <option value="left">left</option>
-                          <option value="right">right</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row mt-2">
-                      <div class="col">
-                        <label for="">Post Date</label>
-                        <input
-                          type="date"
-                          class="form-control"
-                          placeholder="Date"
-                          v-model="form_data.date"
-                          required
-                        />
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button
-                    class="mt-0 float-right ml-2 btn btn-outline-success"
-                    @click="submitAddNewPost()"
-                  >
-                    Sumit
-                  </button>
-                  <button
-                    class="mt-0 float-right ml-2 btn btn-success"
-                    @click="CloseModal()"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </teleport>
   </div>
 </template>
 
 <script>
+import TimeCard from "./TimeCard.vue";
+import AddPostModal from "./AddPostModal.vue";
+
 export default {
+  components: {
+    TimeCard,
+    AddPostModal,
+  },
   data() {
     return {
       showModal: false,
-      form_data: {
-        title: null,
-        sub_title: null,
-        month: null,
-        date: null,
-        date_numer: null,
-        year: null,
-        direction: null,
-      },
+
       post_months: [
         { name: "Jan", numeric: 1 },
         { name: "Feb", numeric: 2 },
@@ -224,55 +81,22 @@ export default {
         .slice()
         .sort((a, b) => new Date(b.date) - new Date(a.date));
     },
+    AddModalVisible() {
+      return this.$store.state.isModalVisible;
+    },
   },
   created() {},
   updated() {},
   mounted() {
+    // setTimeout(() => {
+    // }, 500);
     this.getNextCard();
   },
   methods: {
-    openAddPostModal() {
-      this.showModal = !this.showModal;
-      this.form_data.title == null;
-      this.form_data.sub_title == null;
-      this.form_data.month == null;
-      this.form_data.date == null;
-      this.form_data.year == null;
-      this.form_data.date == null;
+    async openAddPostModal() {
+      this.$store.commit("toggleModal");
     },
-    CloseModal() {
-      let m = document.querySelector("#modal-window");
-      m.classList.add("hideModal");
 
-      setTimeout(() => {
-        this.showModal = !this.showModal;
-      }, 500);
-    },
-    submitAddNewPost() {
-      if (
-        this.form_data.title &&
-        this.form_data.sub_title &&
-        this.form_data.direction &&
-        this.form_data.date !== null
-      ) {
-        let resultdate = new Date(this.form_data.date);
-        let dd = resultdate.getDate();
-        let mm = resultdate.getMonth();
-        let yyyy = resultdate.getFullYear();
-        if (dd < 10) {
-          dd = "0" + dd;
-        }
-        if (mm < 10) {
-          mm = "0" + mm;
-        }
-
-        this.form_data.year = yyyy;
-        this.form_data.month = this.post_months[mm].name;
-        this.form_data.date_numer = dd;
-        this.$store.dispatch("submitdata", this.form_data);
-        this.CloseModal();
-      }
-    },
     // for infinite scrolling
     getNextCard() {
       window.onscroll = () => {
@@ -285,13 +109,32 @@ export default {
               title: `Lorem Ipsum is simply dummy title ${i}`,
               sub_title:
                 "Lorem Ipsum is simply dummy text of the.There are many variations of passages of Lorem Ipsum available.",
-              images: null,
+              images:
+                i % 2 == 0
+                  ? null
+                  : [
+                      {
+                        image_url:
+                          "https://images.pexels.com/photos/6794921/pexels-photo-6794921.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                      },
+                      {
+                        image_url:
+                          "https://images.pexels.com/photos/6794966/pexels-photo-6794966.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                      },
+                      {
+                        image_url:
+                          "https://images.pexels.com/photos/4916238/pexels-photo-4916238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                      },
+                    ],
               month: this.post_months[i].name,
               date: "2023-10-13",
               date_numer: i,
               year: `202${i}`,
               direction: i % 2 == 0 ? "left" : "right",
-              profileImage: null,
+              profileImage:
+                i % 2 == 0
+                  ? "https://images.pexels.com/photos/634021/pexels-photo-634021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  : null,
             });
           }
         }
