@@ -3,6 +3,7 @@ import { createStore } from "vuex";
 const store = createStore({
   state: {
     isModalvisible: false,
+    // postDirectionSet: true,
     posts: [
       {
         title: "Office Starting function",
