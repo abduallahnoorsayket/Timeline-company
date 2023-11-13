@@ -33,20 +33,6 @@
                         required
                       />
                     </div>
-                    <div class="col">
-                      <label for="">Post Direction</label>
-                      <select
-                        class="form-control"
-                        v-model="form_data.direction"
-                        required
-                      >
-                        <option value="" selected disabled>
-                          Select direction
-                        </option>
-                        <option value="left">left</option>
-                        <option value="right">right</option>
-                      </select>
-                    </div>
                   </div>
                   <div class="row mt-2">
                     <div class="col">
@@ -126,7 +112,6 @@ export default {
       if (
         this.form_data.title &&
         this.form_data.sub_title &&
-        this.form_data.direction &&
         this.form_data.date !== null
       ) {
         let resultdate = new Date(this.form_data.date);
@@ -143,7 +128,10 @@ export default {
         this.form_data.year = yyyy;
         this.form_data.month = this.post_months[mm].name;
         this.form_data.date_numer = dd;
+        this.form_data.direction =
+          this.$store.state.posts.length % 2 == 0 ? "right" : "left";
         this.$store.dispatch("submitdata", this.form_data);
+
         this.CloseModal();
       }
     },
