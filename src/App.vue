@@ -10,6 +10,9 @@ export default {
   components: {
     TilimeList,
   },
+  beforeCreate() {
+    this.$store.commit("initialiseStore");
+  },
 };
 </script>
 
